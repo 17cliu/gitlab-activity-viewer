@@ -15,6 +15,12 @@ function formatDateToIsoDate(date) {
     return `${y}-${m}-${d}`;
 }
 
+function floorDateToClosestSunday(date) {
+    const newDate = new Date(date);
+    newDate.setDate(newDate.getDate() - newDate.getDay());
+    return newDate;
+}
+
 function generateDateStampsInRange(oldest, newest) {
     const newestDate = new Date(newest);
     const oldestDate = new Date(oldest);
@@ -40,8 +46,8 @@ function App() {
         return <div>No activity</div>;
     }
 
-    const oldestDate = result[result.length - 1].created_at;
-    const newestDate = result[0].created_at;
+    const oldestDate = floorDateToClosestSunday(result[result.length - 1].created_at);
+    const newestDate = new Date(result[0].created_at);
     const dates = generateDateStampsInRange(oldestDate, newestDate);
 
     // Count events per day
@@ -51,7 +57,7 @@ function App() {
         countsByDay[d]++;
     });
 
-    const tapestryCells = Object.keys(countsByDay).map(s => ({
+    const tapestryCells = Object.keys(countsByDay).reverse().map(s => ({
         date: s,
         count: countsByDay[s]
     }));
@@ -59,7 +65,7 @@ function App() {
     return (
         <div>
             <p>Total items: {result.length}</p>
-            <p>From {oldestDate} to {newestDate}</p>
+            <p>From {oldestDate.toISOString()} to {newestDate.toISOString()}</p>
 
             <Tapestry cells={tapestryCells} />
 

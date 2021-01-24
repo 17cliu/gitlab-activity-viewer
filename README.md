@@ -17,3 +17,15 @@ _This project was bootstrapped with [Create React App](https://github.com/facebo
 
 - http://lortza.github.io/2018/05/22/create-react-app-api-keys.html
 - https://docs.gitlab.com/ee/api/events.html#get-user-contribution-events
+
+## Roadmap
+
+- Support loading _many_ pages of data
+    - Insert reasonable delays between calls in case of rate limiting
+    - Show progress bar (x of y pages)
+- Stats: Most active day of the week, most commits/merges/new issues on x
+- Accept token, user id, git url from page
+- Cache data to local storage
+    - Button to delete data in local storage
+    - Button to add new data to local storage
+    - Button to reload data completely
