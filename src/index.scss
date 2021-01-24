@@ -1,0 +1,68 @@
+body {
+  margin: 1rem;
+  background: #000;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.debug {
+  border: 1px solid grey;
+}
+
+.activity-list {
+  list-style-type: none;
+}
+
+
+// Tapestry
+// ----------------------------------------------------------------------------
+
+$tapestry-cell-size: 2rem;
+
+.tapestry {
+  display: flex;
+  height: $tapestry-cell-size * 7; // Display 7 days (1 week) in one column
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+}
+
+.tapestry-cell {
+  width: $tapestry-cell-size;
+  height: $tapestry-cell-size;
+  background: #fff;
+  color: #000;
+  outline: 1px solid #000;
+  font-size: 10pt;
+  text-align: center;
+}
+
+.tapestry-cell--0 {
+  background: rgb(248, 255, 218);
+}
+
+.tapestry-cell--1 {
+  background: rgb(255, 234, 114);
+}
+
+.tapestry-cell--2 {
+  background: rgb(255, 179, 64);
+}
+
+.tapestry-cell--3 {
+  background: rgb(255, 138, 43);
+}
+
+.tapestry-cell--4 {
+  background: rgb(255, 72, 0);
+}

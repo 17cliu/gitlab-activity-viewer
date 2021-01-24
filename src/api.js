@@ -3,7 +3,7 @@ async function fetchData(queryOptions) {
     const userId = 4;
     const query = new URLSearchParams({
         // page: 894,
-        per_page: 20,
+        per_page: 100,
         ...queryOptions
     });
 
@@ -20,8 +20,8 @@ async function fetchData(queryOptions) {
 
     let body = await response.json();
 
-    // TODO: Temporarily limit to only two pages to avoid overloading site
-    if (nextPage && Number(nextPage) < 3) {
+    // TODO: Temporarily limit number of pages to avoid overloading site
+    if (nextPage && Number(nextPage) < 10) {
         await setTimeout(() => {}, 100);
         body = body.concat(await fetchData({ page: nextPage }));
     }
