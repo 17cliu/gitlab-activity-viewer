@@ -11,6 +11,7 @@ function App() {
 
     return (
         <div className="App">
+            <p>Total items: {result.length}</p>
             <ol className="activity-list">
                 {result.map(o => <Action key={o.id} {...o} />)}
             </ol>
