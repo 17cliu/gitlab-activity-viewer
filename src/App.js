@@ -2,11 +2,8 @@ import { useEffect, useState } from 'react';
 // import Action from './components/Action';
 import Tapestry from './components/Tapestry';
 import Debug from './components/Debug';
-// import fetchData from './api';
-
-// TODO: Using mock data for now.
-import testData from './data.json';
-const fetchData = () => Promise.resolve(testData);
+import Loader from './components/Loader';
+import fetchData from './mockApi';
 
 function formatDateToIsoDate(date) {
     const y = date.getFullYear();
@@ -37,22 +34,42 @@ function generateDateStampsInRange(oldest, newest) {
 }
 
 function App() {
-    const [result, setResult] = useState([]);
+    const [result, setResult] = useState({ data: [], total: 0, nextPage: '' });
+
+    // On app load, fetch first page of data.
     useEffect(() => {
         fetchData().then(setResult);
     }, []);
 
-    if (!result.length) {
+    // When state changes, and there is a next page to fetch, go fetch it!
+    // TODO: Promise.allSettled ?
+    useEffect(() => {
+        if (result.nextPage) {
+            fetchData({ page: result.nextPage }).then(response => {
+                setResult({
+                    ...result,
+                    nextPage: response.nextPage,
+                    data: result.data.concat(response.data)
+                });
+            });
+        }
+    }, [result]);
+
+    const { data, total } = result;
+
+    if (!data.length) {
         return <div>No activity</div>;
+    } else if (data.length < total) {
+        return <Loader current={data.length} total={total} />;
     }
 
-    const oldestDate = floorDateToClosestSunday(result[result.length - 1].created_at);
-    const newestDate = new Date(result[0].created_at);
+    const oldestDate = floorDateToClosestSunday(data[data.length - 1].created_at);
+    const newestDate = new Date(data[0].created_at);
     const dates = generateDateStampsInRange(oldestDate, newestDate);
 
     // Count events per day
     const countsByDay = dates.reduce((memo, s) => ({ ...memo, [s]: 0 }), {});
-    result.forEach(o => {
+    data.forEach(o => {
         const d = formatDateToIsoDate(new Date(o.created_at));
         countsByDay[d]++;
     });
@@ -64,8 +81,11 @@ function App() {
 
     return (
         <div>
-            <p>Total items: {result.length}</p>
-            <p>From {oldestDate.toISOString()} to {newestDate.toISOString()}</p>
+            <p>
+                Showing {data.length} events from {
+                    oldestDate.toISOString()} to {
+                    newestDate.toISOString()}
+            </p>
 
             <Tapestry cells={tapestryCells} />
 

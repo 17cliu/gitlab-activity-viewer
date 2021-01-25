@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 1rem;
   background: #000;
@@ -26,7 +30,7 @@ code {
 // Tapestry
 // ----------------------------------------------------------------------------
 
-$tapestry-cell-size: 2rem;
+$tapestry-cell-size: 1.5rem;
 
 .tapestry {
   display: flex;
@@ -42,9 +46,8 @@ $tapestry-cell-size: 2rem;
   height: $tapestry-cell-size;
   background: #fff;
   color: #000;
-  outline: 1px solid #000;
+  border: $tapestry-cell-size / 10 solid #000;
   font-size: 9pt;
-  font-weight: bold;
   text-align: center;
 }
 

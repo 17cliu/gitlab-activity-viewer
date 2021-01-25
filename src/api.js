@@ -13,20 +13,18 @@ async function fetchData(queryOptions) {
         }
     });
 
+    const body = await response.json();
     const headers = response.headers;
     const nextPage = headers.get('x-next-page');
-    // const totalItems = headers.get('x-total');
-    // const totalPages = headers.get('x-total-pages');
+    const total = headers.get('x-total');
+    const totalPages = headers.get('x-total-pages');
 
-    let body = await response.json();
-
-    // TODO: Temporarily limit number of pages to avoid overloading site
-    if (nextPage && Number(nextPage) < 10) {
-        await setTimeout(() => {}, 100);
-        body = body.concat(await fetchData({ page: nextPage }));
-    }
-
-    return body;
+    return {
+        total,
+        totalPages,
+        nextPage,
+        data: body,
+    };
 }
 
 export default fetchData;
