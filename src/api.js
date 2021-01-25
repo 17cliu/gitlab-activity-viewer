@@ -16,8 +16,8 @@ async function fetchData(queryOptions) {
     const body = await response.json();
     const headers = response.headers;
     const nextPage = headers.get('x-next-page');
-    const total = headers.get('x-total');
-    const totalPages = headers.get('x-total-pages');
+    const total = Number(headers.get('x-total'));
+    const totalPages = Number(headers.get('x-total-pages'));
 
     return {
         total,

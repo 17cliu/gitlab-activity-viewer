@@ -34,33 +34,62 @@ function generateDateStampsInRange(oldest, newest) {
 }
 
 function App() {
-    const [result, setResult] = useState({ data: [], total: 0, nextPage: '' });
+    const [result, setResult] = useState({ data: [], total: 0 });
+    const [numItemsFetched, setNumItemsFetched] = useState(0);
+    const [isLoading, setIsLoading] = useState(true);
 
-    // On app load, fetch first page of data.
+    // On app load, fetch all data
     useEffect(() => {
-        fetchData().then(setResult);
-    }, []);
+        fetchData().then(initialResponse => {
+            setResult(initialResponse);
+            setNumItemsFetched(initialResponse.data.length);
+            console.log('got first page', initialResponse);
 
-    // When state changes, and there is a next page to fetch, go fetch it!
-    // TODO: Promise.allSettled ?
-    useEffect(() => {
-        if (result.nextPage) {
-            fetchData({ page: result.nextPage }).then(response => {
-                setResult({
-                    ...result,
-                    nextPage: response.nextPage,
-                    data: result.data.concat(response.data)
+            if (!initialResponse.nextPage) {
+                // This is all the data there is!
+                setIsLoading(false);
+            } else {
+                // Fetch the remaining pages.
+
+                // Array(n) generates [0, 1, 2, ... n-1]. Because page numbers are
+                // 1-indexed, we generate `totalPages + 1` numbers, then slice off
+                // the 0. We also slice off the 1, because we already fetched the
+                // first page.
+                const pagesToFetch = [...Array(initialResponse.totalPages + 1).keys()].slice(2);
+                console.log('attempting to fetch more pages:', pagesToFetch);
+
+                const promises = pagesToFetch.map(async page => {
+                    // await new Promise(resolve => setTimeout(resolve, Math.random() * 10000));
+                    const data = await fetchData({ page });
+                    setNumItemsFetched(n => n + data.data.length);
+                    return data;
                 });
-            });
-        }
-    }, [result]);
+
+                Promise.allSettled(promises).then(outcomes => {
+                    const newResult = outcomes.reduce((memo, outcome, i) => {
+                        if (outcome.status === 'fulfilled') {
+                            return {
+                                ...memo,
+                                nextPage: outcome.value.nextPage,
+                                data: memo.data.concat(outcome.value.data)
+                            };
+                        } else {
+                            console.log('Failed to fetch chunk of events!', i);
+                            return memo;
+                        }
+                    }, { ...initialResponse });
+
+                    setResult(newResult);
+                    setIsLoading(false);
+                });
+            }
+        });
+    }, []);
 
     const { data, total } = result;
 
-    if (!data.length) {
-        return <div>No activity</div>;
-    } else if (data.length < total) {
-        return <Loader current={data.length} total={total} />;
+    if (isLoading) {
+        return <Loader current={numItemsFetched} total={total} />;
     }
 
     const oldestDate = floorDateToClosestSunday(data[data.length - 1].created_at);

@@ -1,5 +1,7 @@
 
-import testData from './data.json';
+import testData from './datalarge.json';
+
+console.log(`Using local data with ${testData.length} items`);
 
 const PAGE_SIZE = 100;
 const LAST_PAGE = Math.ceil(testData.length / PAGE_SIZE);
@@ -15,17 +17,18 @@ function fetchData(queryOptions) {
         endingIndex = page * PAGE_SIZE;
     }
 
-    console.log(`sending data for page ${page}: ${startingIndex}-${endingIndex}`);
+    // console.log(`sending data for page ${page}: ${startingIndex}-${endingIndex}`);
 
     return new Promise(resolve => {
         setTimeout(() => {
-            resolve({
+            const data = {
                 total: testData.length,
                 totalPages: LAST_PAGE,
                 nextPage: page + 1 > LAST_PAGE ? '' : page + 1,
                 data: testData.slice(startingIndex, endingIndex)
-            });
-        }, 500);
+            };
+            resolve(data);
+        }, 1000);
     });
 }
 

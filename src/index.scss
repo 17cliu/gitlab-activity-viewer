@@ -20,6 +20,8 @@ code {
 
 .debug {
   border: 1px solid grey;
+  height: 400px;
+  overflow: scroll;
 }
 
 .activity-list {
@@ -31,6 +33,10 @@ code {
 // ----------------------------------------------------------------------------
 
 $tapestry-cell-size: 1.5rem;
+
+.tapestry-wrapper {
+  overflow-x: scroll;
+}
 
 .tapestry {
   display: flex;
