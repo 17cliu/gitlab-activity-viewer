@@ -120,7 +120,7 @@ function App() {
                     newestDate.toISOString()}
             </p>
 
-            <Tapestry cells={tapestryCells} />
+            <Tapestry cells={tapestryCells} startDate={oldestDate} />
 
             <div className="charts">
                 <EventsByDayOfWeek data={data} />

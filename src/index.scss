@@ -16,8 +16,8 @@ $color-link: white;
 $color-link-visited: $color-medium;
 $color-link-active: $color-hot;
 $color-link-hover: $color-fiery;
-$color-scrollbar-fg: $color-medium;
-$color-scrollbar-bg: $color-bg;
+$color-scrollbar-fg: hsl(0, 0%, 54%);
+$color-scrollbar-bg: hsl(0, 0%, 27%);
 
 * {
   box-sizing: border-box;
@@ -98,11 +98,44 @@ $tapestry-cell-size: 1.5rem;
 .tapestry-legend {
   height: $tapestry-cell-size + 1rem;
   display: flex;
-  margin-bottom: 0.25rem;
+  margin-top: $tapestry-cell-size / 2;
 }
 
 .tapestry-window {
   overflow-x: scroll;
+}
+
+.tapestry-labels {
+  display: flex;
+  height: $tapestry-cell-size * 1.5;
+}
+
+.tapestry-label {
+  width: $tapestry-cell-size;
+  height: $tapestry-cell-size * 1.5;
+  border: $tapestry-cell-size / 10 solid $color-bg;
+  font-size: 9pt;
+  flex-shrink: 0;
+  display: flex;
+  align-items: end;
+  padding-bottom: 0.2rem;
+  line-height: 1.4;
+}
+
+.tapestry-label--2 {
+  width: $tapestry-cell-size * 2;
+}
+
+.tapestry-label--3 {
+  width: $tapestry-cell-size * 3;
+}
+
+.tapestry-label--4 {
+  width: $tapestry-cell-size * 4;
+}
+
+.tapestry-label--5 {
+  width: $tapestry-cell-size * 5;
 }
 
 .tapestry {
@@ -122,6 +155,7 @@ $tapestry-cell-size: 1.5rem;
   border: $tapestry-cell-size / 10 solid $color-bg;
   font-size: 9pt;
   text-align: center;
+  flex-shrink: 0;
 }
 
 .tapestry-cell--0 {
