@@ -1,21 +1,56 @@
+$font-face-body: 'Raleway', sans-serif;
+$font-face-mono: 'Roboto Mono', 'Consolas', monospace;
+// $font-face-body: 'Raleway', sans-serif;
+// $font-face-mono: 'Roboto Mono', 'Consolas', monospace;
+
+$color-fiery: rgb(255, 72, 0);
+$color-hot: rgb(255, 138, 43);
+$color-medium: rgb(255, 179, 64);
+$color-mild: rgb(255, 234, 114);
+$color-bland: rgb(248, 255, 218);
+
+$color-bg: hsl(0, 0%, 10%);
+$color-text: white;
+$color-text-code: hsl(194, 73%, 74%);
+$color-link: white;
+$color-link-visited: $color-medium;
+$color-link-active: $color-hot;
+$color-link-hover: $color-fiery;
+$color-scrollbar-fg: $color-medium;
+$color-scrollbar-bg: $color-bg;
+
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 1rem;
-  background: #000;
-  color: #fff;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  background: $color-bg;
+  color: $color-text;
+  font-family: $font-face-body;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+a:link {
+    color: $color-link;
+}
+
+a:visited {
+    color: $color-link-visited;
+}
+
+a:active {
+    color: $color-link-active;
+}
+
+a:hover {
+    color: $color-link-hover;
+}
+
+pre, code {
+  font-family: $font-face-mono;
+  color: $color-text-code;
 }
 
 .debug {
@@ -26,6 +61,30 @@ code {
 
 .activity-list {
   list-style-type: none;
+}
+
+
+/* Scrollbars
+----------------------------------------------------------------------------- */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: $color-scrollbar-fg $color-scrollbar-bg;
+}
+
+*::-webkit-scrollbar {
+  width: 16px;
+}
+
+*::-webkit-scrollbar-track {
+  background: $color-scrollbar-bg;
+  border-radius: 6px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: $color-scrollbar-fg;
+  border-radius: 6px;
+  border: 3px solid $color-scrollbar-bg;
 }
 
 
@@ -50,29 +109,29 @@ $tapestry-cell-size: 1.5rem;
 .tapestry-cell {
   width: $tapestry-cell-size;
   height: $tapestry-cell-size;
-  background: #fff;
-  color: #000;
-  border: $tapestry-cell-size / 10 solid #000;
+  background: $color-text;
+  color: $color-bg;
+  border: $tapestry-cell-size / 10 solid $color-bg;
   font-size: 9pt;
   text-align: center;
 }
 
 .tapestry-cell--0 {
-  background: rgb(248, 255, 218);
+  background: $color-bland;
 }
 
 .tapestry-cell--1 {
-  background: rgb(255, 234, 114);
+  background: $color-mild;
 }
 
 .tapestry-cell--2 {
-  background: rgb(255, 179, 64);
+  background: $color-medium;
 }
 
 .tapestry-cell--3 {
-  background: rgb(255, 138, 43);
+  background: $color-hot;
 }
 
 .tapestry-cell--4 {
-  background: rgb(255, 72, 0);
+  background: $color-fiery;
 }

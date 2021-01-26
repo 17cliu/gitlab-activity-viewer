@@ -17,7 +17,7 @@ function TapestryCell({ date, count }) {
     const className = `tapestry-cell tapestry-cell--${level}`;
 
     return (
-        <div data-date={date} data-count={count} className={className}>
+        <div title={date} data-date={date} data-count={count} className={className}>
             {count || ''}
         </div>
     );

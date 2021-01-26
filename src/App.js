@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 // import Action from './components/Action';
 import Tapestry from './components/Tapestry';
-import Debug from './components/Debug';
+import DownloadLink from './components/DownloadLink';
 import Loader from './components/Loader';
 import fetchData from './mockApi';
 
@@ -121,7 +121,7 @@ function App() {
             {/* <ol className="activity-list">
                 {result.map(o => <Action key={o.id} {...o} />)}
             </ol> */}
-            <Debug data={result} />
+            <DownloadLink data={result} />
         </div>
     );
 }
