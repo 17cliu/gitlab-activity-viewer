@@ -6,7 +6,7 @@ import merge from 'lodash.merge';
 function BarChart({ options }) {
     const textStyles = {
         color: '#fff',
-        fontFamily: 'sans-serif',
+        fontFamily: 'Raleway, sans-serif',
         fontWeight: 'normal'
     };
     const defaultOptions = {

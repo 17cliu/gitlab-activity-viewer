@@ -107,12 +107,13 @@ function App() {
     });
 
     const tapestryCells = Object.keys(countsByDay).reverse().map(s => ({
-        date: s,
+        label: s,
         count: countsByDay[s]
     }));
 
     return (
         <div>
+            <h1>How spicy is your GitLab activity? 🔥</h1>
             <p>
                 Showing {data.length} events from {
                     oldestDate.toISOString()} to {

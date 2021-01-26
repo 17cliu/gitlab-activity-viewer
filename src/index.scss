@@ -48,6 +48,8 @@ a:hover {
     color: $color-link-hover;
 }
 
+
+
 pre, code {
   font-family: $font-face-mono;
   color: $color-text-code;
@@ -93,7 +95,13 @@ pre, code {
 
 $tapestry-cell-size: 1.5rem;
 
-.tapestry-wrapper {
+.tapestry-legend {
+  height: $tapestry-cell-size + 1rem;
+  display: flex;
+  margin-bottom: 0.25rem;
+}
+
+.tapestry-window {
   overflow-x: scroll;
 }
 

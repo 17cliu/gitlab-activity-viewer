@@ -1,5 +1,9 @@
 
-function TapestryCell({ date, count }) {
+function TapestryCell({
+    label,
+    count,
+    showCount = true
+}) {
     let level;
 
     if (count > 29) {
@@ -17,8 +21,8 @@ function TapestryCell({ date, count }) {
     const className = `tapestry-cell tapestry-cell--${level}`;
 
     return (
-        <div title={date} data-date={date} data-count={count} className={className}>
-            {count || ''}
+        <div title={label} data-label={label} data-count={count} className={className}>
+            {showCount && count ? count : ''}
         </div>
     );
 }
