@@ -20,6 +20,8 @@ _This project was bootstrapped with [Create React App](https://github.com/facebo
 
 ## Roadmap
 
+- Date formatting
+- Show months/years in heatmap
 - Support loading _many_ pages of data
     - Insert reasonable delays between calls in case of rate limiting
     - Show progress bar (x of y pages)

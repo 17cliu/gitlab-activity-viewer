@@ -135,3 +135,15 @@ $tapestry-cell-size: 1.5rem;
 .tapestry-cell--4 {
   background: $color-fiery;
 }
+
+// Charts
+// ----------------------------------------------------------------------------
+
+.charts {
+  display: flex;
+  margin: 1rem 0;
+}
+
+.bar-chart {
+  width: 400px;
+}

@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 // import Action from './components/Action';
-import Tapestry from './components/Tapestry';
+import EventsByDayOfWeek from './components/EventsByDayOfWeekChart';
+import EventsByTypeChart from './components/EventsByTypeChart';
 import DownloadLink from './components/DownloadLink';
 import Loader from './components/Loader';
+import Tapestry from './components/Tapestry';
+import Statistics from './components/Statistics';
 import fetchData from './mockApi';
 
 function formatDateToIsoDate(date) {
@@ -117,6 +120,12 @@ function App() {
             </p>
 
             <Tapestry cells={tapestryCells} />
+
+            <div className="charts">
+                <EventsByDayOfWeek data={data} />
+                <EventsByTypeChart data={data} />
+                <Statistics data={data} startDate={oldestDate} endDate={newestDate} />
+            </div>
 
             {/* <ol className="activity-list">
                 {result.map(o => <Action key={o.id} {...o} />)}
