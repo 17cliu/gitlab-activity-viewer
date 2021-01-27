@@ -18,8 +18,7 @@ function Statistics({ data, startDate, endDate }) {
         <div className="statistics">
             <p>Average of {averageEventsPerDay} events per day</p>
             <p>Average of {averageEventsPerWeekday} events per day,
-                excluding weekends (but including holidays because
-                I don't know when your holidays or vacations are)
+                excluding weekends
             </p>
         </div>
     );

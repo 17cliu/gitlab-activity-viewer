@@ -66,6 +66,7 @@ function EventsByTypeChart({ data }) {
     const counts = countEventsByType(data);
     const options = {
         title: { text: 'Events by Type' },
+        chart: { width: 450 },
         series: [
             {
                 name: 'Counts',

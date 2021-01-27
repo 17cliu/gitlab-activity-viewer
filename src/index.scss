@@ -205,8 +205,9 @@ $tapestry-cell-size: 1.5rem;
 .charts {
   display: flex;
   margin: 1rem 0;
+
+  @media (max-width: 45em) {
+    flex-direction: column;
+  }
 }
 
-.bar-chart {
-  width: 400px;
-}

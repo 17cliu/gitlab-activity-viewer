@@ -11,17 +11,19 @@ function BarChart({ options }) {
     };
     const defaultOptions = {
         title: {
-            style: textStyles,
+            style: {
+                ...textStyles,
+                fontWeight: '700',
+            }
         },
         chart: {
-            type: 'column',
+            type: 'bar',
             backgroundColor: null,
             plotBackgroundColor: null,
-            height: 300,
             style: textStyles
         },
         plotOptions: {
-            column: {
+            bar: {
                 animation: false,
                 borderWidth: 0,
                 color: '#ff4800',
@@ -45,9 +47,10 @@ function BarChart({ options }) {
         },
         xAxis: {
             type: 'category',
+            lineWidth: 0,
             labels: {
                 style: textStyles,
-                rotation: 270,
+                // rotation: 270,
                 autoRotation: false,
                 allowOverlap: false,
                 overflow: 'allow'

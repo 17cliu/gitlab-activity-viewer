@@ -17,6 +17,7 @@ function EventsByDayOfWeekChart({ data }) {
     const counts = countEventsByDaysOfTheWeek(data);
     const options = {
         title: { text: 'Events by Day of the Week' },
+        chart: { width: 350 },
         series: [
             {
                 name: 'Counts',
