@@ -1,21 +1,18 @@
+const THRESHOLDS = [50, 40, 30, 20, 10, 1, 0];
+const NUM_THRESHOLDS = THRESHOLDS.length;
 
 function TapestryCell({
     label,
     count,
     showCount = true
 }) {
-    let level;
+    let level = 0;
 
-    if (count > 29) {
-        level = 4;
-    } else if (count > 19) {
-        level = 3;
-    } else if (count > 9) {
-        level = 2;
-    } else if (count > 0) {
-        level = 1;
-    } else {
-        level = 0;
+    for (let i = 0; i < NUM_THRESHOLDS; i++) {
+        if (count >= THRESHOLDS[i]) {
+            level = NUM_THRESHOLDS - 1 - i;
+            break;
+        }
     }
 
     const className = `tapestry-cell tapestry-cell--${level}`;

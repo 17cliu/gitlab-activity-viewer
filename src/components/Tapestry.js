@@ -33,11 +33,16 @@ function Tapestry({ cells, startDate }) {
                 </div>
             </div>
             <div className="tapestry-legend">
-                <TapestryCell showCount={false} label="0" count="0" />
-                <TapestryCell showCount={false} label="1 to 9 contributions" count="1" />
-                <TapestryCell showCount={false} label="10 to 19 contributions" count="10" />
-                <TapestryCell showCount={false} label="20 to 29 contributions" count="20" />
-                <TapestryCell showCount={false} label="30 to 39 contributions" count="30" />
+                <TapestryCell showCount={false} label="Bland: 0" count="0" />
+                <TapestryCell showCount={false} label="Mild: 1 to 9 contributions" count="1" />
+                <TapestryCell showCount={false} label="Medium: 10 to 19 contributions" count="10" />
+                <TapestryCell showCount={false} label="Hot: 20 to 29 contributions" count="20" />
+                <TapestryCell showCount={false}
+                    label="Extra hot: 30 to 39 contributions" count="30" />
+                <TapestryCell showCount={false}
+                    label="Are you sure this is edible?: 40 to 49 contributions" count="40" />
+                <TapestryCell showCount={false}
+                    label="Actual fire: 50+ contributions" count="50" />
             </div>
         </>
     );

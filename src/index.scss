@@ -3,11 +3,13 @@ $font-face-mono: 'Roboto Mono', 'Consolas', monospace;
 // $font-face-body: 'Raleway', sans-serif;
 // $font-face-mono: 'Roboto Mono', 'Consolas', monospace;
 
-$color-fiery: rgb(255, 72, 0);
+$color-xxxhot: rgb(255, 0, 0);
+$color-xxhot: rgb(255, 51, 0);
+$color-xhot: rgb(255, 94, 0);
 $color-hot: rgb(255, 138, 43);
 $color-medium: rgb(255, 179, 64);
-$color-mild: rgb(255, 234, 114);
-$color-bland: rgb(248, 255, 218);
+$color-mild: rgb(250, 225, 83);
+$color-bland: hsl(0, 0%, 23%);
 
 $color-bg: hsl(0, 0%, 10%);
 $color-text: white;
@@ -15,9 +17,9 @@ $color-text-code: hsl(194, 73%, 74%);
 $color-link: white;
 $color-link-visited: $color-medium;
 $color-link-active: $color-hot;
-$color-link-hover: $color-fiery;
-$color-scrollbar-fg: hsl(0, 0%, 54%);
-$color-scrollbar-bg: hsl(0, 0%, 27%);
+$color-link-hover: $color-xhot;
+$color-scrollbar-fg: hsl(0, 4%, 49%);
+$color-scrollbar-bg: $color-bg;
 
 * {
   box-sizing: border-box;
@@ -117,7 +119,8 @@ $tapestry-cell-size: 1.5rem;
   font-size: 9pt;
   flex-shrink: 0;
   display: flex;
-  align-items: end;
+  flex-direction: column;
+  justify-content: flex-end;
   padding-bottom: 0.2rem;
   line-height: 1.4;
 }
@@ -136,6 +139,15 @@ $tapestry-cell-size: 1.5rem;
 
 .tapestry-label--5 {
   width: $tapestry-cell-size * 5;
+}
+
+.tapestry-label-year,
+.tapestry-label-month {
+  display: block;
+}
+
+.tapestry-label-year {
+  font-weight: 700;
 }
 
 .tapestry {
@@ -175,8 +187,17 @@ $tapestry-cell-size: 1.5rem;
 }
 
 .tapestry-cell--4 {
-  background: $color-fiery;
+  background: $color-xhot;
 }
+
+.tapestry-cell--5 {
+  background: $color-xxhot;
+}
+
+.tapestry-cell--6 {
+  background: $color-xxxhot;
+}
+
 
 // Charts
 // ----------------------------------------------------------------------------

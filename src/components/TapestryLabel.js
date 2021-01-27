@@ -11,8 +11,8 @@ function TapestryLabel({ year, month, size }) {
 
     return (
         <div title={label} data-month={month} data-year={year} className={className}>
-            {!month && <>{year}<br/></>}
-            {monthName}
+            {!month && <span className="tapestry-label-year">{year}</span>}
+            <span className="tapestry-label-month">{monthName}</span>
         </div>
     );
 }
