@@ -7,34 +7,12 @@ import Loader from './components/Loader';
 import Tapestry from './components/Tapestry';
 import Statistics from './components/Statistics';
 import fetchData from './mockApi';
-
-function formatDateToIsoDate(date) {
-    const y = date.getFullYear();
-    const m = `${date.getMonth() + 1}`.padStart(2, '0');
-    const d = `${date.getDate()}`.padStart(2, '0');
-    return `${y}-${m}-${d}`;
-}
-
-function floorDateToClosestSunday(date) {
-    const newDate = new Date(date);
-    newDate.setDate(newDate.getDate() - newDate.getDay());
-    return newDate;
-}
-
-function generateDateStampsInRange(oldest, newest) {
-    const newestDate = new Date(newest);
-    const oldestDate = new Date(oldest);
-    const dates = [];
-
-    // https://github.com/eslint/eslint/issues/6984
-    // eslint-disable-next-line no-unmodified-loop-condition
-    while (newestDate > oldestDate) {
-        dates.push(formatDateToIsoDate(newestDate));
-        newestDate.setDate(newestDate.getDate() - 1);
-    }
-
-    return dates;
-}
+import {
+    floorDateToClosestSunday,
+    formatLongDate,
+    formatIsoDate,
+    generateDateStampsInRange
+} from './utils';
 
 function App() {
     const [result, setResult] = useState({ data: [], total: 0 });
@@ -102,7 +80,7 @@ function App() {
     // Count events per day
     const countsByDay = dates.reduce((memo, s) => ({ ...memo, [s]: 0 }), {});
     data.forEach(o => {
-        const d = formatDateToIsoDate(new Date(o.created_at));
+        const d = formatIsoDate(new Date(o.created_at));
         countsByDay[d]++;
     });
 
@@ -115,9 +93,8 @@ function App() {
         <div>
             <h1>How spicy is your GitLab activity? 🔥</h1>
             <p>
-                Showing {data.length} events from {
-                    oldestDate.toISOString()} to {
-                    newestDate.toISOString()}
+                Showing <b>{data.length} events</b> from {
+                    formatLongDate(oldestDate)} to {formatLongDate(newestDate)}.
             </p>
 
             <Tapestry cells={tapestryCells} startDate={oldestDate} />

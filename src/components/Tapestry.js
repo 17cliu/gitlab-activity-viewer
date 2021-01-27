@@ -26,7 +26,10 @@ function Tapestry({ cells, startDate }) {
         <>
             <div className="tapestry-window">
                 <div className="tapestry-labels">
-                    {monthLabels.map((label, i) => <TapestryLabel key={i} {...label} />)}
+                    {monthLabels.map((label, i) => <TapestryLabel
+                        key={`${label.year}${label.month}`}
+                        {...label}
+                    />)}
                 </div>
                 <div className="tapestry">
                     {cells.map(cell => <TapestryCell key={cell.date} {...cell} />)}
