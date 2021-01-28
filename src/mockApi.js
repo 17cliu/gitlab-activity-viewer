@@ -6,7 +6,20 @@ console.log(`Using local data with ${testData.length} items`);
 const PAGE_SIZE = 100;
 const LAST_PAGE = Math.ceil(testData.length / PAGE_SIZE);
 
-function fetchData(options) {
+export async function fetchUser(options) {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            const data = {
+                id: 4,
+                name: 'Mock User',
+                username: options.username,
+            };
+            resolve(data);
+        }, 1000);
+    });
+}
+
+export function fetchUserEvents(options) {
     let page = 1;
     let startingIndex = 0;
     let endingIndex = PAGE_SIZE;
@@ -31,5 +44,3 @@ function fetchData(options) {
         }, 1000);
     });
 }
-
-export default fetchData;

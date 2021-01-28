@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 // import Action from './Action';
-import fetchData from '../api';
+import { fetchUser, fetchUserEvents } from '../api';
 import {
     floorDateToClosestSunday,
     formatLongDate,
@@ -14,14 +14,23 @@ import Loader from './Loader';
 import Tapestry from './Tapestry';
 import Statistics from './Statistics';
 
-function Dashboard({ host, userId, accessToken }) {
+function Dashboard({ host, username, accessToken }) {
     const [result, setResult] = useState({ data: [], total: 0 });
     const [numItemsFetched, setNumItemsFetched] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
+    const [user, setUser] = useState(null);
 
-    // On app load, fetch all data
+    // On app load, fetch user details
     useEffect(() => {
-        fetchData({ host, userId, accessToken }).then(initialResponse => {
+        fetchUser({ host, username, accessToken }).then(setUser);
+    }, [host, username, accessToken]);
+
+    // After user is loaded, fetch user events
+    useEffect(() => {
+        if (!user) return;
+
+        console.log(user);
+        fetchUserEvents({ host, userId: user.id, accessToken }).then(initialResponse => {
             setResult(initialResponse);
             setNumItemsFetched(initialResponse.data.length);
             console.log('got first page', initialResponse);
@@ -44,9 +53,9 @@ function Dashboard({ host, userId, accessToken }) {
 
                 const promises = pagesToFetch.map(async page => {
                     // await new Promise(resolve => setTimeout(resolve, Math.random() * 10000));
-                    const data = await fetchData({
+                    const data = await fetchUserEvents({
                         host,
-                        userId,
+                        userId: user.id,
                         accessToken,
                         queryOptions: { page }
                     });
@@ -73,7 +82,7 @@ function Dashboard({ host, userId, accessToken }) {
                 });
             }
         });
-    }, [host, userId, accessToken]);
+    }, [host, user, accessToken]);
 
     const { data, total } = result;
 

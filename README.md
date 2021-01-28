@@ -21,8 +21,6 @@ _This project was bootstrapped with [Create React App](https://github.com/facebo
 ## Roadmap
 
 - Gracefully handle no events
-- Better form experience (default gitlab.com, allow username)
-    https://gitlab.com/api/v4/users?username=mojavelinux
 - Form validation
 - Responsive charts
 - Support loading _many_ pages of data

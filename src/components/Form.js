@@ -5,7 +5,7 @@ const DEFAULT_HOST = 'gitlab.com';
 function Form({ onSubmit }) {
     const [customHost, setCustomHost] = useState('');
     const [isCustomHost, setIsCustomHost] = useState(false);
-    const [userId, setUserId] = useState('');
+    const [username, setUsername] = useState('');
     const [accessToken, setAccessToken] = useState('');
 
     const handleSubmit = e => {
@@ -15,7 +15,7 @@ function Form({ onSubmit }) {
         const options = {
             host: isCustomHost ? customHost : DEFAULT_HOST,
             accessToken: isCustomHost ? accessToken : '',
-            userId,
+            username,
         };
 
         onSubmit(options);
@@ -93,22 +93,17 @@ function Form({ onSubmit }) {
             </div>
 
             <div className="form-row">
-                <label htmlFor="userId">
-                    Your numerical user ID
-                    (find this at User Settings &gt; Edit Profile)
+                <label htmlFor="username">
+                    Your username
                 </label>
                 <input
                     type="text"
                     className="text-input"
-                    id="userId"
-                    name="userId"
-                    placeholder="4"
-                    value={userId}
-                    onChange={e => setUserId(e.target.value)}
+                    id="username"
+                    name="username"
+                    value={username}
+                    onChange={e => setUsername(e.target.value)}
                 />
-            </div>
-
-            <div className="form-row">
             </div>
 
             <button className="btn" onClick={handleSubmit}>Go!</button>
