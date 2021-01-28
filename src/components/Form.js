@@ -75,7 +75,7 @@ function Form({ onSubmit }) {
                         <div className="form-row">
                             <label htmlFor="accessToken">
                             Your access token
-                            (generate one with `read_user` scope at
+                            (generate one with `read_api` scope at
                             User Settings &gt; Access Tokens)
                             </label>
                             <input

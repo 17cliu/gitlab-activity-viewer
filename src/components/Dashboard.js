@@ -35,6 +35,14 @@ function Dashboard({ host, username, accessToken }) {
         return <Loader current={numItemsLoaded} total={total} />;
     }
 
+    if (!data.length) {
+        return (
+            <div className="dashboard">
+                <p>No activity found for @{user.username} :(</p>
+            </div>
+        );
+    }
+
     const oldestDate = floorDateToClosestSunday(data[data.length - 1].created_at);
     const newestDate = new Date(data[0].created_at);
     const dates = generateDateStampsInRange(oldestDate, newestDate);
@@ -52,7 +60,9 @@ function Dashboard({ host, username, accessToken }) {
     }));
 
     return (
-        <div>
+        <div className="dashboard">
+            <h2>@{user.username}</h2>
+
             <p>
                 Showing <b>{data.length} events</b> from {
                     formatLongDate(oldestDate)} to {formatLongDate(newestDate)}.

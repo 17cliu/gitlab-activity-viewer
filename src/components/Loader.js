@@ -2,9 +2,9 @@
 function Loader({ current, total }) {
     const pct = current / total * 100;
     return (
-        <div>
-            <p>Loaded {current} of {total} events</p>
-            <progress max={total} value={current}>{pct}%</progress>
+        <div className="loader">
+            <label for="loader">Loaded {current} of {total} events</label>
+            <progress id="loader" max={total} value={current}>{pct}%</progress>
         </div>
     );
 }

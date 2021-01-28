@@ -32,7 +32,7 @@ button, input {
 h1 {
     font-size: $font-size-x-large;
     font-weight: 700;
-    margin: 1rem 0;
+    margin: 2rem 0;
 }
 
 h2 {
@@ -144,6 +144,25 @@ pre, code {
     &:active {
         background: $color-xxxhot;
     }
+}
+
+// Loader
+// ----------------------------------------------------------------------------
+
+.loader {
+    margin: 1rem 0 3rem;
+
+    label {
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+}
+
+// Dashboard
+// ----------------------------------------------------------------------------
+
+.dashboard {
+    margin: 1rem 0 3rem;
 }
 
 // Tapestry
