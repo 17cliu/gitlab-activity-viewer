@@ -20,13 +20,12 @@ _This project was bootstrapped with [Create React App](https://github.com/facebo
 
 ## Roadmap
 
-- Date formatting
+- Form validation
 - Responsive charts
 - Support loading _many_ pages of data
     - Insert reasonable delays between calls in case of rate limiting
     - Show progress bar (x of y pages)
 - Stats: Most active day of the week, most commits/merges/new issues on x
-- Accept token, user id, git url from page
 - Styling with Emotion/styled-components/etc
 - Cache data to local storage
     - Button to delete data in local storage

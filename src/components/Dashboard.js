@@ -14,14 +14,14 @@ import Loader from './Loader';
 import Tapestry from './Tapestry';
 import Statistics from './Statistics';
 
-function Dashboard() {
+function Dashboard({ host, userId, accessToken }) {
     const [result, setResult] = useState({ data: [], total: 0 });
     const [numItemsFetched, setNumItemsFetched] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
 
     // On app load, fetch all data
     useEffect(() => {
-        fetchData().then(initialResponse => {
+        fetchData({ host, userId, accessToken }).then(initialResponse => {
             setResult(initialResponse);
             setNumItemsFetched(initialResponse.data.length);
             console.log('got first page', initialResponse);
@@ -32,6 +32,9 @@ function Dashboard() {
             } else {
                 // Fetch the remaining pages.
 
+                // TODO: reduce for testing
+                // initialResponse.totalPages = Math.min(initialResponse.totalPages, 10);
+
                 // Array(n) generates [0, 1, 2, ... n-1]. Because page numbers are
                 // 1-indexed, we generate `totalPages + 1` numbers, then slice off
                 // the 0. We also slice off the 1, because we already fetched the
@@ -41,7 +44,12 @@ function Dashboard() {
 
                 const promises = pagesToFetch.map(async page => {
                     // await new Promise(resolve => setTimeout(resolve, Math.random() * 10000));
-                    const data = await fetchData({ page });
+                    const data = await fetchData({
+                        host,
+                        userId,
+                        accessToken,
+                        queryOptions: { page }
+                    });
                     setNumItemsFetched(n => n + data.data.length);
                     return data;
                 });
@@ -65,7 +73,7 @@ function Dashboard() {
                 });
             }
         });
-    }, []);
+    }, [host, userId, accessToken]);
 
     const { data, total } = result;
 

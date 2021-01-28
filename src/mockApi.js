@@ -6,13 +6,13 @@ console.log(`Using local data with ${testData.length} items`);
 const PAGE_SIZE = 100;
 const LAST_PAGE = Math.ceil(testData.length / PAGE_SIZE);
 
-function fetchData(queryOptions) {
+function fetchData(options) {
     let page = 1;
     let startingIndex = 0;
     let endingIndex = PAGE_SIZE;
 
-    if (queryOptions) {
-        page = queryOptions.page;
+    if (options.queryOptions) {
+        page = options.queryOptions.page;
         startingIndex = (page - 1) * PAGE_SIZE;
         endingIndex = page * PAGE_SIZE;
     }

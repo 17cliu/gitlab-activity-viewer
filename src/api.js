@@ -1,15 +1,15 @@
-async function fetchData(queryOptions) {
-    const baseUrl = 'https://git.transmissionmedia.ca/api/v4';
-    const userId = 4;
+async function fetchData(options) {
+    // TODO: ah what naive url concat you have
+    const baseUrl = `https://${options.host}/api/v4`;
+    const userId = options.userId;
     const query = new URLSearchParams({
-        // page: 894,
         per_page: 100,
-        ...queryOptions
+        ...options.queryOptions
     });
 
     const response = await fetch(`${baseUrl}/users/${userId}/events?${query.toString()}`, {
         headers: {
-            'PRIVATE-TOKEN': process.env.REACT_APP_GITLAB_TOKEN,
+            'PRIVATE-TOKEN': options.accessToken // process.env.REACT_APP_GITLAB_TOKEN,
         }
     });
 

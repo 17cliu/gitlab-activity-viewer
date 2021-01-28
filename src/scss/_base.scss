@@ -32,16 +32,19 @@ button, input {
 h1 {
     font-size: $font-size-x-large;
     font-weight: 700;
+    margin: 1rem 0;
 }
 
 h2 {
     font-size: $font-size-large;
     font-weight: 700;
+    margin: 1rem 0;
 }
 
 h3 {
     font-size: $font-size-regular;
     font-weight: 700;
+    margin: 1rem 0;
 }
 
 pre, code {
@@ -107,6 +110,14 @@ pre, code {
     background: $color-xhot;
     border: none;
     border-radius: 0.2rem;
+
+    &:hover {
+        background: $color-xxhot;
+    }
+
+    &:active {
+        background: $color-xxxhot;
+    }
 }
 
 // Tapestry
@@ -121,6 +132,7 @@ $tapestry-cell-size: 1.5rem;
 }
 
 .tapestry-window {
+    margin-top: 1rem;
     overflow-x: scroll;
 }
 
