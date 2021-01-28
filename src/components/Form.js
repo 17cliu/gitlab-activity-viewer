@@ -26,7 +26,7 @@ function Form({ onSubmit }) {
     };
 
     return (
-        <form className="form">
+        <form onSubmit={handleSubmit} className="form">
             <div className="form-row">
                 <fieldset className="fieldset">
                     <legend htmlFor="host">
@@ -106,7 +106,7 @@ function Form({ onSubmit }) {
                 />
             </div>
 
-            <button className="btn" onClick={handleSubmit}>Go!</button>
+            <input className="btn" type="submit" value="Go!" />
         </form>
     );
 }
