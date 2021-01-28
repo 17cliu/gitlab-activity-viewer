@@ -1,51 +1,53 @@
 
+import { calculateMonthLabels } from '../utils';
 import TapestryCell from './TapestryCell';
 import TapestryLabel from './TapestryLabel';
 
+const THRESHOLDS = [
+    { value: 0, label: 'Bland: 0' },
+    { value: 1, label: 'Mild: 1 to 9 contributions' },
+    { value: 10, label: 'Medium: 10 to 19 contributions' },
+    { value: 20, label: 'Hot: 20 to 29 contributions' },
+    { value: 30, label: 'Extra hot: 30 to 39 contributions' },
+    { value: 40, label: 'Are you sure this is edible?: 40 to 49 contributions' },
+    { value: 50, label: 'Actual fire: 50+ contributions' }
+];
+
 function Tapestry({ cells, startDate }) {
     const numWeeks = Math.ceil(cells.length / 7);
-    const weeks = [...Array(numWeeks).keys()];
-
-    const monthLabels = [];
-    let currentLabel = null;
-
-    weeks.forEach(n => {
-        const date = new Date(startDate);
-        date.setDate(date.getDate() + n * 7);
-        const month = date.getMonth();
-
-        if (currentLabel && currentLabel.month === month) {
-            currentLabel.size++;
-        } else {
-            currentLabel = { year: date.getFullYear(), month, size: 1 };
-            monthLabels.push(currentLabel);
-        }
-    });
+    const monthLabels = calculateMonthLabels(startDate, numWeeks);
 
     return (
         <>
             <div className="tapestry-window">
                 <div className="tapestry-labels">
-                    {monthLabels.map((label, i) => <TapestryLabel
-                        key={`${label.year}${label.month}`}
-                        {...label}
-                    />)}
+                    {monthLabels.map((label, i) => (
+                        <TapestryLabel
+                            key={`${label.year}${label.month}`}
+                            {...label}
+                        />
+                    ))}
                 </div>
                 <div className="tapestry">
-                    {cells.map(cell => <TapestryCell key={cell.date} {...cell} />)}
+                    {cells.map(cell => (
+                        <TapestryCell
+                            key={cell.date}
+                            thresholds={THRESHOLDS}
+                            {...cell}
+                        />
+                    ))}
                 </div>
             </div>
             <div className="tapestry-legend">
-                <TapestryCell showCount={false} label="Bland: 0" count="0" />
-                <TapestryCell showCount={false} label="Mild: 1 to 9 contributions" count="1" />
-                <TapestryCell showCount={false} label="Medium: 10 to 19 contributions" count="10" />
-                <TapestryCell showCount={false} label="Hot: 20 to 29 contributions" count="20" />
-                <TapestryCell showCount={false}
-                    label="Extra hot: 30 to 39 contributions" count="30" />
-                <TapestryCell showCount={false}
-                    label="Are you sure this is edible?: 40 to 49 contributions" count="40" />
-                <TapestryCell showCount={false}
-                    label="Actual fire: 50+ contributions" count="50" />
+                {THRESHOLDS.map(o => (
+                    <TapestryCell
+                        key={`legend-${o.value}`}
+                        count={o.value}
+                        label={o.label}
+                        showCount={false}
+                        thresholds={THRESHOLDS}
+                    />
+                ))}
             </div>
         </>
     );

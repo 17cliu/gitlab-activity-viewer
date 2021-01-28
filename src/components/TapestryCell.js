@@ -1,16 +1,15 @@
-const THRESHOLDS = [50, 40, 30, 20, 10, 1, 0];
-const NUM_THRESHOLDS = THRESHOLDS.length;
-
 function TapestryCell({
-    label,
     count,
-    showCount = true
+    label,
+    showCount = true,
+    thresholds,
 }) {
+    const numThresholds = thresholds.length;
     let level = 0;
 
-    for (let i = 0; i < NUM_THRESHOLDS; i++) {
-        if (count >= THRESHOLDS[i]) {
-            level = NUM_THRESHOLDS - 1 - i;
+    for (let i = numThresholds - 1; i >= 0; i--) {
+        if (count >= thresholds[i].value) {
+            level = i;
             break;
         }
     }

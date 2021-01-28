@@ -4,8 +4,8 @@ const MONTHS = [
     'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
 ];
 
-function TapestryLabel({ year, month, size }) {
-    const className = `tapestry-label tapestry-label--${size}`;
+function TapestryLabel({ year, month, numWeeksInMonth }) {
+    const className = `tapestry-label tapestry-label--${numWeeksInMonth}`;
     const monthName = MONTHS[month];
     const label = `${monthName} ${year}`;
 
