@@ -1,8 +1,4 @@
-* {
- box-sizing: border-box;
-}
-
-  body {
+body {
     margin: 1rem;
     background: $color-bg;
     color: $color-text;
@@ -11,28 +7,27 @@
     line-height: $leading-compact;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-  }
+}
 
-  a:link {
-      color: $color-link;
-  }
+a:link {
+    color: $color-link;
+}
 
-  a:visited {
-      color: $color-link-visited;
-  }
+a:visited {
+    color: $color-link-visited;
+}
 
-  a:active {
-      color: $color-link-active;
-  }
+a:active {
+    color: $color-link-active;
+}
 
-  a:hover {
-      color: $color-link-hover;
-  }
+a:hover {
+    color: $color-link-hover;
+}
 
-  button, input {
+button, input {
     font-family: $font-face-body;
-  }
-
+}
 
 h1 {
     font-size: $font-size-x-large;
@@ -49,55 +44,53 @@ h3 {
     font-weight: 700;
 }
 
-
-  pre, code {
+pre, code {
     font-family: $font-face-mono;
     color: $color-text-code;
-  }
+}
 
-  .debug {
+.debug {
     border: 1px solid grey;
     height: 400px;
     overflow: scroll;
-  }
+}
 
-  .activity-list {
+.activity-list {
     list-style-type: none;
-  }
+}
 
+// Scrollbars
+// ----------------------------------------------------------------------------
 
-  /* Scrollbars
-  ----------------------------------------------------------------------------- */
-
-  * {
+* {
     scrollbar-width: thin;
     scrollbar-color: $color-scrollbar-fg $color-scrollbar-bg;
-  }
+}
 
-  *::-webkit-scrollbar {
+*::-webkit-scrollbar {
     width: 16px;
-  }
+}
 
-  *::-webkit-scrollbar-track {
+*::-webkit-scrollbar-track {
     background: $color-scrollbar-bg;
     border-radius: 6px;
-  }
+}
 
-  *::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb {
     background-color: $color-scrollbar-fg;
     border-radius: 6px;
     border: 3px solid $color-scrollbar-bg;
-  }
+}
 
-  // Forms
-  // ----------------------------------------------------------------------------
+// Forms
+// ----------------------------------------------------------------------------
 
-  .form-row {
+.form-row {
     display: block;
     margin: 2rem 0;
-  }
+}
 
-  .text-input {
+.text-input {
     display: block;
     margin: 0.4rem 0;
     padding: 0.2rem 0.5rem;
@@ -106,37 +99,37 @@ h3 {
     border: none;
     border-radius: 0.2rem;
     width: 20em;
-  }
+}
 
-  .btn {
+.btn {
     padding: 0.5rem 1.5rem;
     font-size: $font-size-regular;
     background: $color-xhot;
     border: none;
     border-radius: 0.2rem;
-  }
+}
 
-  // Tapestry
-  // ----------------------------------------------------------------------------
+// Tapestry
+// ----------------------------------------------------------------------------
 
-  $tapestry-cell-size: 1.5rem;
+$tapestry-cell-size: 1.5rem;
 
-  .tapestry-legend {
+.tapestry-legend {
     height: $tapestry-cell-size + 1rem;
     display: flex;
     margin-top: $tapestry-cell-size / 2;
-  }
+}
 
-  .tapestry-window {
+.tapestry-window {
     overflow-x: scroll;
-  }
+}
 
-  .tapestry-labels {
+.tapestry-labels {
     display: flex;
     height: $tapestry-cell-size * 2;
-  }
+}
 
-  .tapestry-label {
+.tapestry-label {
     width: $tapestry-cell-size;
     border: $tapestry-cell-size / 10 solid $color-bg;
     font-size: 9pt;
@@ -146,43 +139,43 @@ h3 {
     justify-content: flex-end;
     padding-bottom: 0.2rem;
     line-height: $leading-regular;
-  }
+}
 
-  .tapestry-label--2 {
+.tapestry-label--2 {
     width: $tapestry-cell-size * 2;
-  }
+}
 
-  .tapestry-label--3 {
+.tapestry-label--3 {
     width: $tapestry-cell-size * 3;
-  }
+}
 
-  .tapestry-label--4 {
+.tapestry-label--4 {
     width: $tapestry-cell-size * 4;
-  }
+}
 
-  .tapestry-label--5 {
+.tapestry-label--5 {
     width: $tapestry-cell-size * 5;
-  }
+}
 
-  .tapestry-label-year,
-  .tapestry-label-month {
+.tapestry-label-year,
+.tapestry-label-month {
     display: block;
-  }
+}
 
-  .tapestry-label-year {
+.tapestry-label-year {
     font-weight: 700;
-  }
+}
 
-  .tapestry {
+.tapestry {
     display: flex;
     height: $tapestry-cell-size * 7; // Display 7 days (1 week) in one column
     flex-direction: column;
     flex-wrap: wrap;
     justify-content: flex-start;
     align-content: flex-start;
-  }
+}
 
-  .tapestry-cell {
+.tapestry-cell {
     width: $tapestry-cell-size;
     height: $tapestry-cell-size;
     background: $color-text;
@@ -191,46 +184,44 @@ h3 {
     font-size: 9pt;
     text-align: center;
     flex-shrink: 0;
-  }
+}
 
-  .tapestry-cell--0 {
+.tapestry-cell--0 {
     background: $color-bland;
-  }
+}
 
-  .tapestry-cell--1 {
+.tapestry-cell--1 {
     background: $color-mild;
-  }
+}
 
-  .tapestry-cell--2 {
+.tapestry-cell--2 {
     background: $color-medium;
-  }
+}
 
-  .tapestry-cell--3 {
+.tapestry-cell--3 {
     background: $color-hot;
-  }
+}
 
-  .tapestry-cell--4 {
+.tapestry-cell--4 {
     background: $color-xhot;
-  }
+}
 
-  .tapestry-cell--5 {
+.tapestry-cell--5 {
     background: $color-xxhot;
-  }
+}
 
-  .tapestry-cell--6 {
+.tapestry-cell--6 {
     background: $color-xxxhot;
-  }
+}
 
+// Charts
+// ----------------------------------------------------------------------------
 
-  // Charts
-  // ----------------------------------------------------------------------------
-
-  .charts {
+.charts {
     display: flex;
     margin: 1rem 0;
 
     @media (max-width: 45em) {
-      flex-direction: column;
+        flex-direction: column;
     }
-  }
-
+}
