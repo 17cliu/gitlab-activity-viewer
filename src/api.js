@@ -9,7 +9,7 @@ async function fetchData(options) {
 
     const response = await fetch(`${baseUrl}/users/${userId}/events?${query.toString()}`, {
         headers: {
-            'PRIVATE-TOKEN': options.accessToken // process.env.REACT_APP_GITLAB_TOKEN,
+            'PRIVATE-TOKEN': options.accessToken || process.env.REACT_APP_GITLAB_COM_TOKEN,
         }
     });
 

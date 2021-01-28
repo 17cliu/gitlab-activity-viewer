@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 // import Action from './Action';
-import fetchData from '../mockApi';
+import fetchData from '../api';
 import {
     floorDateToClosestSunday,
     formatLongDate,
@@ -33,7 +33,7 @@ function Dashboard({ host, userId, accessToken }) {
                 // Fetch the remaining pages.
 
                 // TODO: reduce for testing
-                // initialResponse.totalPages = Math.min(initialResponse.totalPages, 10);
+                initialResponse.totalPages = Math.min(initialResponse.totalPages, 10);
 
                 // Array(n) generates [0, 1, 2, ... n-1]. Because page numbers are
                 // 1-indexed, we generate `totalPages + 1` numbers, then slice off

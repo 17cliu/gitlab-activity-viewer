@@ -4,9 +4,9 @@ _This project was bootstrapped with [Create React App](https://github.com/facebo
 
 ## Quick start
 
-- Create a `.env` file in root folder with your GitLab api token:
+- Create a `.env` file in root folder with your GitLab.com api token:
     ```
-    REACT_APP_GITLAB_TOKEN=xxxxx
+    REACT_APP_GITLAB_COM_TOKEN=xxxxx
     ```
 - `npm start` to run app in development mode. Site served at http://localhost:3000.
 - `npm test` to run tests in watch mode.
@@ -20,6 +20,9 @@ _This project was bootstrapped with [Create React App](https://github.com/facebo
 
 ## Roadmap
 
+- Gracefully handle no events
+- Better form experience (default gitlab.com, allow username)
+    https://gitlab.com/api/v4/users?username=mojavelinux
 - Form validation
 - Responsive charts
 - Support loading _many_ pages of data

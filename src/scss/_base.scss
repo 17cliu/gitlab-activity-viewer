@@ -104,6 +104,31 @@ pre, code {
     width: 20em;
 }
 
+.fieldset legend {
+    margin: 0 0 0.8rem;
+}
+
+.radio-label {
+    display: block;
+    margin: 0 0 0.4rem;
+}
+
+.radio-input {
+    margin: 0 0.5rem 0 0;
+}
+
+.nested-fields {
+    margin: 0 0 3rem 3rem;
+
+    > .form-row {
+        margin: 1rem 0;
+    }
+
+    > .form-row:first-child {
+        margin: 0.5rem 0;
+    }
+}
+
 .btn {
     padding: 0.5rem 1.5rem;
     font-size: $font-size-regular;
@@ -236,4 +261,18 @@ $tapestry-cell-size: 1.5rem;
     @media (max-width: 45em) {
         flex-direction: column;
     }
+}
+
+// Utilities
+// ----------------------------------------------------------------------------
+
+.visually-hidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
 }
