@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import FormTextField from './FormTextField';
 
 const DEFAULT_HOST = 'gitlab.com';
 
@@ -7,18 +8,40 @@ function Form({ onSubmit }) {
     const [isCustomHost, setIsCustomHost] = useState(false);
     const [username, setUsername] = useState('');
     const [accessToken, setAccessToken] = useState('');
+    const [validationErrors, setValidationErrors] = useState({});
 
     const handleSubmit = e => {
         e.preventDefault();
-        // TODO: validate
 
-        const options = {
-            host: isCustomHost ? customHost : DEFAULT_HOST,
-            accessToken: isCustomHost ? accessToken : '',
-            username,
-        };
+        // TODO: should try to clear errors on form dirty
 
-        onSubmit(options);
+        const newValidationErrors = {};
+
+        if (isCustomHost) {
+            if (!customHost) {
+                newValidationErrors.customHost = 'Please enter domain';
+            }
+
+            if (!accessToken) {
+                newValidationErrors.accessToken = 'Please enter access token';
+            }
+        }
+
+        if (!username) {
+            newValidationErrors.username = 'Please enter username';
+        }
+
+        setValidationErrors(newValidationErrors);
+
+        if (Object.keys(newValidationErrors).length <= 0) {
+            const options = {
+                host: isCustomHost ? customHost : DEFAULT_HOST,
+                accessToken: isCustomHost ? accessToken : '',
+                username,
+            };
+
+            onSubmit(options);
+        }
     };
 
     const handleRadioChange = e => {
@@ -57,54 +80,35 @@ function Form({ onSubmit }) {
 
                 {isCustomHost && (
                     <div className="nested-fields">
-
-                        <div className="form-row">
-                            <label htmlFor="customHost">
-                            URL of your GitLab instance (e.g. gitlab.mycompany.com)
-                            </label>
-                            <input type="text"
-                                className="text-input"
-                                id="customHost"
-                                name="customHost"
-                                placeholder="git.mycompany.com"
-                                value={customHost}
-                                onChange={e => setCustomHost(e.target.value)}
-                            />
-                        </div>
-
-                        <div className="form-row">
-                            <label htmlFor="accessToken">
-                            Your access token
-                            (generate one with `read_api` scope at
-                            User Settings &gt; Access Tokens)
-                            </label>
-                            <input
-                                type="text"
-                                className="text-input"
-                                id="accessToken"
-                                name="accessToken"
-                                placeholder="YOUR_API_KEY"
-                                value={accessToken}
-                                onChange={e => setAccessToken(e.target.value)}
-                            />
-                        </div>
+                        <FormTextField
+                            id="customHost"
+                            label="URL of your GitLab instance (e.g. gitlab.mycompany.com)"
+                            placeholder="git.mycompany.com"
+                            value={customHost}
+                            onChange={e => setCustomHost(e.target.value)}
+                            error={validationErrors.customHost}
+                        />
+                        <FormTextField
+                            id="accessToken"
+                            label="Your access token
+                                (generate one with `read_api` scope at
+                                User Settings &gt; Access Tokens)"
+                            placeholder="YOUR_API_KEY"
+                            value={accessToken}
+                            onChange={e => setAccessToken(e.target.value)}
+                            error={validationErrors.accessToken}
+                        />
                     </div>
                 )}
             </div>
 
-            <div className="form-row">
-                <label htmlFor="username">
-                    Your username
-                </label>
-                <input
-                    type="text"
-                    className="text-input"
-                    id="username"
-                    name="username"
-                    value={username}
-                    onChange={e => setUsername(e.target.value)}
-                />
-            </div>
+            <FormTextField
+                id="username"
+                label="Your username"
+                value={username}
+                onChange={e => setUsername(e.target.value)}
+                error={validationErrors.username}
+            />
 
             <input className="btn" type="submit" value="Go!" />
         </form>

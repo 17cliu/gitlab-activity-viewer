@@ -102,6 +102,11 @@ pre, code {
     border: none;
     border-radius: 0.2rem;
     width: 20em;
+    transition: background-color 0.2s ease;
+
+    &.is-invalid {
+        background: $color-mild;
+    }
 }
 
 .fieldset legend {
@@ -127,6 +132,12 @@ pre, code {
     > .form-row:first-child {
         margin: 0.5rem 0;
     }
+}
+
+.invalid-message {
+    font-size: $font-size-small;
+    font-weight: 700;
+    color: $color-hot;
 }
 
 .btn {
