@@ -3,9 +3,8 @@ function FormTextField({
     label,
     name,
     placeholder = '',
-    value,
-    onChange,
-    error
+    error,
+    register
 }) {
     return (
         <div className="form-row">
@@ -17,10 +16,10 @@ function FormTextField({
                 id={id}
                 name={name || id}
                 placeholder={placeholder}
-                value={value}
-                onChange={onChange}
+                aria-invalid={error ? 'true' : 'false'}
+                ref={register}
             />
-            {error && <div className="invalid-message">{error}</div>}
+            {error && <div role="alert" className="invalid-message">{error}</div>}
         </div>
     );
 }

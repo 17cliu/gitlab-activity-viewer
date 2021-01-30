@@ -1,55 +1,26 @@
-import { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import FormTextField from './FormTextField';
 
 const DEFAULT_HOST = 'gitlab.com';
 
 function Form({ onSubmit }) {
-    const [customHost, setCustomHost] = useState('');
-    const [isCustomHost, setIsCustomHost] = useState(false);
-    const [username, setUsername] = useState('');
-    const [accessToken, setAccessToken] = useState('');
-    const [validationErrors, setValidationErrors] = useState({});
+    const { register, watch, errors, handleSubmit } = useForm();
 
-    const handleSubmit = e => {
-        e.preventDefault();
+    const handleFormSubmit = data => {
+        const options = {
+            host: data.isCustomHost === 'true' ? data.customHost : DEFAULT_HOST,
+            accessToken: data.isCustomHost ? data.accessToken : '',
+            username: data.username
+        };
 
-        // TODO: should try to clear errors on form dirty
-
-        const newValidationErrors = {};
-
-        if (isCustomHost) {
-            if (!customHost) {
-                newValidationErrors.customHost = 'Please enter domain';
-            }
-
-            if (!accessToken) {
-                newValidationErrors.accessToken = 'Please enter access token';
-            }
-        }
-
-        if (!username) {
-            newValidationErrors.username = 'Please enter username';
-        }
-
-        setValidationErrors(newValidationErrors);
-
-        if (Object.keys(newValidationErrors).length <= 0) {
-            const options = {
-                host: isCustomHost ? customHost : DEFAULT_HOST,
-                accessToken: isCustomHost ? accessToken : '',
-                username,
-            };
-
-            onSubmit(options);
-        }
+        onSubmit(options);
     };
 
-    const handleRadioChange = e => {
-        setIsCustomHost(e.target.value !== DEFAULT_HOST);
-    };
+    // Watch value of this form field, and see if the value is "true".
+    const showCustomHostOptions = watch('isCustomHost') === 'true';
 
     return (
-        <form onSubmit={handleSubmit} className="form">
+        <form onSubmit={handleSubmit(handleFormSubmit)} className="form">
             <div className="form-row">
                 <fieldset className="fieldset">
                     <legend htmlFor="host">
@@ -58,10 +29,10 @@ function Form({ onSubmit }) {
                     <label className="radio-label">
                         <input type="radio"
                             className="radio-input"
-                            name="hostType"
-                            value={DEFAULT_HOST}
-                            checked={!isCustomHost}
-                            onChange={handleRadioChange}
+                            name="isCustomHost"
+                            value="false"
+                            ref={register}
+                            defaultChecked
                         />
                         GitLab.com
                     </label>
@@ -69,24 +40,22 @@ function Form({ onSubmit }) {
                     <label className="radio-label">
                         <input type="radio"
                             className="radio-input"
-                            name="hostType"
-                            value="custom"
-                            checked={isCustomHost}
-                            onChange={handleRadioChange}
+                            name="isCustomHost"
+                            value="true"
+                            ref={register}
                         />
                         A self-hosted instance of GitLab...
                     </label>
                 </fieldset>
 
-                {isCustomHost && (
+                {showCustomHostOptions && (
                     <div className="nested-fields">
                         <FormTextField
                             id="customHost"
                             label="URL of your GitLab instance (e.g. gitlab.mycompany.com)"
                             placeholder="git.mycompany.com"
-                            value={customHost}
-                            onChange={e => setCustomHost(e.target.value)}
-                            error={validationErrors.customHost}
+                            error={errors.customHost && 'Please enter domain'}
+                            register={register({ required: true })}
                         />
                         <FormTextField
                             id="accessToken"
@@ -94,9 +63,8 @@ function Form({ onSubmit }) {
                                 (generate one with `read_api` scope at
                                 User Settings &gt; Access Tokens)"
                             placeholder="YOUR_API_KEY"
-                            value={accessToken}
-                            onChange={e => setAccessToken(e.target.value)}
-                            error={validationErrors.accessToken}
+                            error={errors.accessToken && 'Please enter access token'}
+                            register={register({ required: true })}
                         />
                     </div>
                 )}
@@ -105,9 +73,8 @@ function Form({ onSubmit }) {
             <FormTextField
                 id="username"
                 label="Your username"
-                value={username}
-                onChange={e => setUsername(e.target.value)}
-                error={validationErrors.username}
+                error={errors.username && 'Please enter username'}
+                register={register({ required: true, minLength: 1 })}
             />
 
             <input className="btn" type="submit" value="Go!" />
