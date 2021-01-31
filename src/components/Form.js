@@ -19,6 +19,18 @@ function Form({ onSubmit }) {
     // Watch value of this form field, and see if the value is "true".
     const showCustomHostOptions = watch('isCustomHost') === 'true';
 
+    // Provide nuanced username validation errors
+    let usernameError;
+
+    if (errors.username?.type === 'required') {
+        usernameError = 'Please enter username';
+    } else if (errors.username?.type === 'minLength') {
+        usernameError = 'Username must be at least two letters long';
+    } else if (errors.username?.type === 'pattern') {
+        usernameError = 'Username must contain only letters, numbers, ' +
+            'dash (-), underscore (_), and periods (.)';
+    }
+
     return (
         <form onSubmit={handleSubmit(handleFormSubmit)} className="form">
             <div className="form-row">
@@ -73,8 +85,19 @@ function Form({ onSubmit }) {
             <FormTextField
                 id="username"
                 label="Your username"
-                error={errors.username && 'Please enter username'}
-                register={register({ required: true, minLength: 1 })}
+                error={usernameError}
+                register={register({
+                    required: true,
+                    // Approximation of GitLab username rules:
+                    // - Only allow letters, numbers, dash, underscore, period
+                    // - Must be at least two characters long
+                    // https://gitlab.com/gitlab-org/gitlab/-/blob/
+                    // 91895122e1085ef027146334cedb875d1e4f2693/lib/gitlab/path_regex.rb#L135
+                    pattern: /^[a-z0-9-_.]{2,}$/i,
+                    // The regex above covers this, but including this rule makes
+                    // it easier to add a separate validation message for length.
+                    minLength: 2,
+                })}
             />
 
             <input className="btn" type="submit" value="Go!" />
