@@ -7,12 +7,15 @@ const PAGE_SIZE = 100;
 const LAST_PAGE = Math.ceil(testData.length / PAGE_SIZE);
 
 export async function fetchUser(options) {
+    const { host, username } = options;
+    const url = new URL(`https://${host}/api/v4/users?username=${username}`);
+    console.log(`If this were real, I'd be contacting ${url}`);
     return new Promise(resolve => {
         setTimeout(() => {
             const data = {
                 id: 4,
                 name: 'Mock User',
-                username: options.username,
+                username,
             };
             resolve(data);
         }, 1000);

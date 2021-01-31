@@ -1,14 +1,14 @@
 export async function fetchUser(options) {
-    // TODO: ah what naive url concat you have
-    const url = `https://${options.host}/api/v4/users?username=${options.username}`;
+    const { host, username, accessToken } = options;
+    const url = new URL(`https://${host}/api/v4/users?username=${username}`);
     const fetchOptions = {};
 
-    if (options.accessToken) {
+    if (accessToken) {
         // This endpoint is publicly available for gitlab.com, so we only
         // need to pass an access token if we're accessing a private self-hosted
         // instance of GitLab.
         fetchOptions.headers = {
-            'PRIVATE-TOKEN': options.accessToken
+            'PRIVATE-TOKEN': accessToken
         };
     }
 
@@ -23,17 +23,16 @@ export async function fetchUser(options) {
 }
 
 export async function fetchUserEvents(options) {
-    // TODO: ah what naive url concat you have
-    const baseUrl = `https://${options.host}/api/v4`;
-    const userId = options.userId;
+    const { host, userId, accessToken } = options;
     const query = new URLSearchParams({
         per_page: 100,
         ...options.queryOptions
     });
+    const url = new URL(`https://${host}/api/v4/users/${userId}/events?${query.toString()}`);
 
-    const response = await fetch(`${baseUrl}/users/${userId}/events?${query.toString()}`, {
+    const response = await fetch(url, {
         headers: {
-            'PRIVATE-TOKEN': options.accessToken || process.env.REACT_APP_GITLAB_COM_TOKEN,
+            'PRIVATE-TOKEN': accessToken || process.env.REACT_APP_GITLAB_COM_TOKEN,
         }
     });
 

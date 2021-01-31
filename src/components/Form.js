@@ -19,6 +19,17 @@ function Form({ onSubmit }) {
     // Watch value of this form field, and see if the value is "true".
     const showCustomHostOptions = watch('isCustomHost') === 'true';
 
+    // TODO: Validation error management here is getting a lil unwieldy
+
+    // Provide nuanced access token validation errors
+    let accessTokenError;
+
+    if (errors.accessToken?.type === 'required') {
+        accessTokenError = 'Please enter access token';
+    } else if (errors.accessToken?.type === 'pattern') {
+        accessTokenError = 'Access token must contain only letters and numbers';
+    }
+
     // Provide nuanced username validation errors
     let usernameError;
 
@@ -75,8 +86,11 @@ function Form({ onSubmit }) {
                                 (generate one with `read_api` scope at
                                 User Settings &gt; Access Tokens)"
                             placeholder="YOUR_API_KEY"
-                            error={errors.accessToken && 'Please enter access token'}
-                            register={register({ required: true })}
+                            error={accessTokenError}
+                            register={register({
+                                required: true,
+                                pattern: /^[a-z0-9]+$/i,
+                            })}
                         />
                     </div>
                 )}
