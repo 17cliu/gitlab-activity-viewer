@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 // import Action from './Action';
-import { fetchUser } from '../api';
+import { fetchUser } from '../mockApi';
 import useData, { FETCH_STATES } from '../hooks/useData';
 import {
     floorDateToClosestSunday,
@@ -20,6 +20,7 @@ function Dashboard({ host, username, accessToken }) {
 
     // On app load, fetch user details
     useEffect(() => {
+        // TODO: handle user not found error
         fetchUser({ host, username, accessToken }).then(setUser);
     }, [host, username, accessToken]);
 
@@ -33,6 +34,14 @@ function Dashboard({ host, username, accessToken }) {
 
     if (status === FETCH_STATES.LOADING) {
         return <Loader current={numItemsLoaded} total={total} />;
+    }
+
+    if (status === FETCH_STATES.ERROR) {
+        return (
+            <div className="dashboard">
+                <p>Something went wrong :(</p>
+            </div>
+        );
     }
 
     if (!data.length) {

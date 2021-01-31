@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { fetchUserEvents } from '../api';
+import { fetchUserEvents } from '../mockApi';
 
 export const FETCH_STATES = {
     LOADING: 'LOADING',
@@ -68,6 +68,9 @@ export default function useData({ host, userId, accessToken }) {
                     setStatus(FETCH_STATES.SUCCESS);
                 });
             }
+        }).catch(err => {
+            console.warn('Caught error in useData!', err);
+            setStatus(FETCH_STATES.ERROR);
         });
     }, [host, userId, accessToken]);
 

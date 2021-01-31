@@ -10,15 +10,21 @@ export async function fetchUser(options) {
     const { host, username } = options;
     const url = new URL(`https://${host}/api/v4/users?username=${username}`);
     console.log(`If this were real, I'd be contacting ${url}`);
-    return new Promise(resolve => {
-        setTimeout(() => {
-            const data = {
-                id: 4,
-                name: 'Mock User',
-                username,
-            };
-            resolve(data);
-        }, 1000);
+    return new Promise((resolve, reject) => {
+        const isSuccess = Math.random() > 0.3;
+
+        if (isSuccess) {
+            setTimeout(() => {
+                const data = {
+                    id: 4,
+                    name: 'Mock User',
+                    username,
+                };
+                resolve(data);
+            }, 1000);
+        } else {
+            reject(new Error('User not found'));
+        }
     });
 }
 
@@ -35,15 +41,21 @@ export function fetchUserEvents(options) {
 
     // console.log(`sending data for page ${page}: ${startingIndex}-${endingIndex}`);
 
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
         setTimeout(() => {
-            const data = {
-                total: testData.length,
-                totalPages: LAST_PAGE,
-                nextPage: page + 1 > LAST_PAGE ? '' : page + 1,
-                data: testData.slice(startingIndex, endingIndex)
-            };
-            resolve(data);
+            const isSuccess = Math.random() > 0.3;
+
+            if (isSuccess) {
+                const data = {
+                    total: testData.length,
+                    totalPages: LAST_PAGE,
+                    nextPage: page + 1 > LAST_PAGE ? '' : page + 1,
+                    data: testData.slice(startingIndex, endingIndex)
+                };
+                resolve(data);
+            } else {
+                reject(new Error('No data 4 u'));
+            }
         }, 1000);
     });
 }

@@ -31,7 +31,7 @@ function Tapestry({ cells, startDate }) {
                 <div className="tapestry">
                     {cells.map(cell => (
                         <TapestryCell
-                            key={cell.date}
+                            key={cell.label}
                             thresholds={THRESHOLDS}
                             {...cell}
                         />

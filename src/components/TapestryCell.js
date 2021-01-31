@@ -17,7 +17,11 @@ function TapestryCell({
     const className = `tapestry-cell tapestry-cell--${level}`;
 
     return (
-        <div title={label} data-label={label} data-count={count} className={className}>
+        <div className={className}
+            data-label={label}
+            data-count={count}
+            title={label}
+        >
             {showCount && count ? count : ''}
         </div>
     );
