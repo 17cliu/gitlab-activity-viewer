@@ -1,6 +1,4 @@
-import { useEffect, useState } from 'react';
 // import Action from './Action';
-import { fetchUser } from '../mockApi';
 import useData, { FETCH_STATES } from '../hooks/useData';
 import {
     floorDateToClosestSunday,
@@ -16,35 +14,21 @@ import Tapestry from './Tapestry';
 import Statistics from './Statistics';
 
 function Dashboard({ host, username, accessToken }) {
-    const [user, setUser] = useState(null);
-
-    // On app load, fetch user details
-    useEffect(() => {
-        // TODO: handle user not found error
-        fetchUser({ host, username, accessToken }).then(setUser);
-    }, [host, username, accessToken]);
-
-    const {
-        result,
-        numItemsLoaded,
-        status
-    } = useData({ host, userId: user ? user.id : null, accessToken });
-
-    const { data, total } = result;
+    const { user, events, numEventsLoaded, status } = useData({ host, username, accessToken });
+    const { data, total } = events;
 
     if (status === FETCH_STATES.LOADING) {
-        return <Loader current={numItemsLoaded} total={total} />;
-    }
-
-    if (status === FETCH_STATES.ERROR) {
+        // Still loading...
+        return <Loader current={numEventsLoaded} total={total} />;
+    } else if (status === FETCH_STATES.ERROR) {
+        // Encountered error :(
         return (
             <div className="dashboard">
                 <p>Something went wrong :(</p>
             </div>
         );
-    }
-
-    if (!data.length) {
+    } else if (!data.length) {
+        // Request completed successfully, but no data :(
         return (
             <div className="dashboard">
                 <p>No activity found for @{user.username} :(</p>
@@ -88,7 +72,7 @@ function Dashboard({ host, username, accessToken }) {
             {/* <ol className="activity-list">
                 {result.map(o => <Action key={o.id} {...o} />)}
             </ol> */}
-            <DownloadLink data={result} />
+            <DownloadLink data={events} />
         </div>
     );
 }

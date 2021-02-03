@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { fetchUserEvents } from '../mockApi';
+import { fetchUser, fetchUserEvents } from '../mockApi';
 
 export const FETCH_STATES = {
     LOADING: 'LOADING',
@@ -7,24 +7,39 @@ export const FETCH_STATES = {
     ERROR: 'ERROR',
 };
 
-export default function useData({ host, userId, accessToken }) {
-    const [result, setResult] = useState({ data: [], total: 0 });
-    const [numItemsLoaded, setNumItemsLoaded] = useState(0);
+export default function useData({ host, username, accessToken }) {
+    const [user, setUser] = useState(null);
+    const [events, setEvents] = useState({ data: [], total: 0 });
+    const [numEventsLoaded, setNumEventsLoaded] = useState(0);
     const [status, setStatus] = useState(FETCH_STATES.LOADING);
     // const [error, setError] = useState(null);
 
+    // First, fetch the user
     useEffect(() => {
-        if (!userId) return;
+        setStatus(FETCH_STATES.LOADING);
+
+        fetchUser({ host, username, accessToken })
+            .then(setUser)
+            .catch(err => {
+                console.warn('Could not fetch user', err);
+                setUser(null);
+                setStatus(FETCH_STATES.ERROR);
+            });
+    }, [host, username, accessToken]);
+
+    // Next, fetch the user's data
+    useEffect(() => {
+        if (!user) return;
 
         setStatus(FETCH_STATES.LOADING);
 
-        fetchUserEvents({ host, userId, accessToken }).then(initialResponse => {
+        fetchUserEvents({ host, userId: user.id, accessToken }).then(initialResponse => {
             // TODO: reduce for testing
             const totalPages = Math.min(initialResponse.totalPages, 10);
             // const totalPages = initialResponse.totalPages;
 
-            setResult(initialResponse);
-            setNumItemsLoaded(initialResponse.data.length);
+            setEvents(initialResponse);
+            setNumEventsLoaded(initialResponse.data.length);
 
             if (!initialResponse.nextPage) {
                 // This is all the data there is!
@@ -37,16 +52,16 @@ export default function useData({ host, userId, accessToken }) {
                 // the 0. We also slice off the 1, because we already fetched the
                 // first page.
                 const pagesToFetch = [...Array(totalPages + 1).keys()].slice(2);
-                console.log('attempting to fetch more pages:', pagesToFetch);
+                console.log('Attempting to fetch more pages:', pagesToFetch);
 
                 const promises = pagesToFetch.map(async page => {
                     const thisResponse = await fetchUserEvents({
                         host,
-                        userId,
+                        userId: user.id,
                         accessToken,
                         queryOptions: { page }
                     });
-                    setNumItemsLoaded(n => n + thisResponse.data.length);
+                    setNumEventsLoaded(n => n + thisResponse.data.length);
                     return thisResponse;
                 });
 
@@ -59,12 +74,13 @@ export default function useData({ host, userId, accessToken }) {
                                 data: memo.data.concat(outcome.value.data)
                             };
                         } else {
+                            // TODO: Tell user that some data is missing!
                             console.log('Failed to fetch chunk of events!', i);
                             return memo;
                         }
                     }, { ...initialResponse });
 
-                    setResult(newResult);
+                    setEvents(newResult);
                     setStatus(FETCH_STATES.SUCCESS);
                 });
             }
@@ -72,11 +88,12 @@ export default function useData({ host, userId, accessToken }) {
             console.warn('Caught error in useData!', err);
             setStatus(FETCH_STATES.ERROR);
         });
-    }, [host, userId, accessToken]);
+    }, [host, user, accessToken]);
 
     return {
-        result,
-        numItemsLoaded,
+        user,
+        events,
+        numEventsLoaded,
         status
     };
 }
