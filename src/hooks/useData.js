@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { fetchUser, fetchUserEvents } from '../mockApi';
+import { fetchUser, fetchUserEvents } from '../api';
 
 export const FETCH_STATES = {
     LOADING: 'LOADING',
