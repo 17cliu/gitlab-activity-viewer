@@ -1,5 +1,8 @@
 # GitLab Activity Viewer
 
+![build status](https://github.com/17cliu/gitlab-activity-viewer/workflows/build/badge.svg)
+
+
 _This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app)._
 
 ## Quick start
@@ -20,7 +23,9 @@ _This project was bootstrapped with [Create React App](https://github.com/facebo
 
 ## Roadmap
 
+- Sanitize inputs
 - Handle user not found
+- Handle someone connecting to bad api -- don't break on bad data!
 - Responsive charts
 - Support loading _many_ pages of data
     - Insert reasonable delays between calls in case of rate limiting
