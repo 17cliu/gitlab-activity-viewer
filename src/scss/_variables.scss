@@ -5,15 +5,21 @@ $color-hot: rgb(255, 138, 43);
 $color-medium: rgb(255, 179, 64);
 $color-mild: rgb(250, 225, 83);
 $color-bland: hsl(0, 0%, 23%);
+$color-grey: hsl(0, 4%, 49%);
+$color-slate: hsl(0, 0%, 24%);
+$color-charcoal: hsl(0, 0%, 10%);
+$color-ice: hsl(189, 82%, 78%);
+$color-white: white;
 
-$color-bg: hsl(0, 0%, 10%);
-$color-text: white;
+$color-border: $color-slate;
+$color-bg: $color-charcoal;
+$color-text: $color-white;
 $color-text-code: hsl(194, 73%, 74%);
-$color-link: white;
-$color-link-visited: $color-medium;
+$color-link: $color-white;
+$color-link-visited: $color-white;
 $color-link-active: $color-hot;
 $color-link-hover: $color-xhot;
-$color-scrollbar-fg: hsl(0, 4%, 49%);
+$color-scrollbar-fg: $color-grey;
 $color-scrollbar-bg: $color-bg;
 
 // Font families

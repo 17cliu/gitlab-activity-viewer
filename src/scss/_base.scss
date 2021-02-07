@@ -9,21 +9,10 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-a:link {
-    color: $color-link;
-}
-
-a:visited {
-    color: $color-link-visited;
-}
-
-a:active {
-    color: $color-link-active;
-}
-
-a:hover {
-    color: $color-link-hover;
-}
+a:link { color: $color-link; }
+a:visited { color: $color-link-visited; }
+a:active { color: $color-link-active; }
+a:hover { color: $color-link-hover; }
 
 button, input {
     font-family: $font-face-body;
@@ -291,6 +280,35 @@ $tapestry-cell-size: 1.5rem;
 
     @media (max-width: 45em) {
         flex-direction: column;
+    }
+}
+
+// Footer
+// ----------------------------------------------------------------------------
+
+.footer {
+    border-top: 1px solid $color-border;
+    font-size: $font-size-small;
+    // line-height: $leading-regular;
+    margin: 8rem 0 1rem;
+    padding: 1rem 0;
+
+    a {
+        text-decoration: none;
+        display: inline-block;
+        padding: 0.33rem 0 0;
+    }
+
+    a + a {
+        margin-left: 1rem;
+    }
+
+    a:hover {
+        color: $color-text;
+
+        .text-label {
+            border-bottom: 1px solid $color-link;
+        }
     }
 }
 
