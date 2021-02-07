@@ -9,6 +9,25 @@ function BarChart({ options }) {
         fontFamily: 'Raleway, sans-serif',
         fontWeight: 'normal'
     };
+    const plotOptions = {
+        animation: false,
+        enableMouseTracking: false,
+        borderWidth: 0,
+        color: '#ff4800',
+        cursor: 'pointer',
+        // pointWidth: 20,
+        pointPadding: 0,
+        dataLabels: {
+            enabled: true,
+            crop: false,
+            overflow: 'none',
+            style: {
+                ...textStyles,
+                fontSize: '9pt',
+                fontWeight: 700
+            }
+        }
+    };
     const defaultOptions = {
         title: {
             style: {
@@ -23,31 +42,24 @@ function BarChart({ options }) {
             style: textStyles
         },
         plotOptions: {
-            bar: {
-                animation: false,
-                borderWidth: 0,
-                color: '#ff4800',
-                cursor: 'pointer',
-                // pointWidth: 20,
-                dataLabels: {
-                    enabled: true,
-                    crop: false,
-                    overflow: 'none',
-                    style: textStyles
-                }
-            }
+            // Define both to provide default styling for either type.
+            // Having an extraneous set of plot type options does not cause
+            // problems with Highcharts.
+            bar: plotOptions,
+            column: plotOptions
         },
         yAxis: {
             title: 'Number of events',
-            gridLineWidth: 0,
-            lineWidth: 0,
+            gridLineWidth: 1,
+            gridLineColor: '#3d3d3d',
             labels: {
                 style: textStyles
             }
         },
         xAxis: {
             type: 'category',
-            lineWidth: 0,
+            lineWidth: 1,
+            lineColor: '#3d3d3d',
             labels: {
                 style: textStyles,
                 // rotation: 270,

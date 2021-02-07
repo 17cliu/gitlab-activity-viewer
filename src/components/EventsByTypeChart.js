@@ -1,5 +1,23 @@
 import BarChart from './BarChart';
 
+const LABELS = {
+    comment: 'Commented',
+    commit: 'Pushed commits',
+    openedIssue: 'Opened issue',
+    closedIssue: 'Closed issue',
+    openedMilestone: 'Opened milestone',
+    closedMilestone: 'Closed milestone',
+    destroyedMilestone: 'Destroyed milestone',
+    openedMr: 'Opened MR',
+    approvedMr: 'Approved MR',
+    acceptedMr: 'Accepted MR',
+    closedMr: 'Closed MR',
+    createdTag: 'Created tag',
+    deletedTag: 'Deleted tag',
+    createdBranch: 'Created branch',
+    deletedBranch: 'Deleted branch'
+};
+
 export function countEventsByType(data) {
     const state = {
         comment: 0,
@@ -66,11 +84,14 @@ function EventsByTypeChart({ data }) {
     const counts = countEventsByType(data);
     const options = {
         title: { text: 'Events by Type' },
-        chart: { width: 450 },
+        chart: {
+            width: 500,
+            height: 500
+        },
         series: [
             {
                 name: 'Counts',
-                data: Object.keys(counts).map(k => [k, counts[k]])
+                data: Object.keys(counts).map(k => [LABELS[k], counts[k]])
             }
         ]
     };
