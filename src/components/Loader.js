@@ -4,7 +4,9 @@ function Loader({ current, total }) {
     return (
         <div className="loader">
             <label htmlFor="loader">Loaded {current} of {total} events</label>
-            <progress id="loader" max={total} value={current}>{pct}%</progress>
+            <progress id="loader" className="progress" max={total} value={current}>
+                {pct}%
+            </progress>
         </div>
     );
 }

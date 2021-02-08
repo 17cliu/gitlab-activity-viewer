@@ -152,6 +152,34 @@ pre, code {
 .loader {
     margin: 1rem 0 3rem;
 
+    .progress {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        background-color: $color-progress-bg; // Bar background color in Firefox/IE
+        border: 1px solid $color-progress-bg;
+        border-radius: 0.2rem;
+        color: $color-progress-fg; // Progress color in IE; ignored in other browsers
+        height: 2rem;
+        width: 16rem;
+        max-width: 100%;
+
+        &::-moz-progress-bar {
+            background-color: $color-progress-fg; // Progress color in Firefox
+            border-radius: 0.2rem;
+        }
+
+        &::-webkit-progress-bar {
+            background-color: $color-bg; // Bar background color in Chrome
+            border-radius: 0.2rem;
+        }
+
+        &::-webkit-progress-value {
+            background-color: $color-progress-fg; // Progress color in Chrome
+            border-radius: 0.2rem;
+        }
+    }
+
     label {
         display: block;
         margin-bottom: 0.5rem;
@@ -276,6 +304,7 @@ $tapestry-cell-size: 1.5rem;
 
 .charts {
     display: flex;
+    flex-direction: column;
     margin: 1rem 0;
 
     @media (max-width: 45em) {
@@ -289,7 +318,6 @@ $tapestry-cell-size: 1.5rem;
 .footer {
     border-top: 1px solid $color-border;
     font-size: $font-size-small;
-    // line-height: $leading-regular;
     margin: 8rem 0 1rem;
     padding: 1rem 0;
 
