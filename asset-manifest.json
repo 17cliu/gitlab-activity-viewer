@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/gitlab-activity-viewer/static/css/main.5096a65e.chunk.css",
+    "main.js": "/gitlab-activity-viewer/static/js/main.49239fea.chunk.js",
+    "main.js.map": "/gitlab-activity-viewer/static/js/main.49239fea.chunk.js.map",
+    "runtime-main.js": "/gitlab-activity-viewer/static/js/runtime-main.e4ed7f12.js",
+    "runtime-main.js.map": "/gitlab-activity-viewer/static/js/runtime-main.e4ed7f12.js.map",
+    "static/js/2.299b20d9.chunk.js": "/gitlab-activity-viewer/static/js/2.299b20d9.chunk.js",
+    "static/js/2.299b20d9.chunk.js.map": "/gitlab-activity-viewer/static/js/2.299b20d9.chunk.js.map",
+    "static/js/3.cd8f85b6.chunk.js": "/gitlab-activity-viewer/static/js/3.cd8f85b6.chunk.js",
+    "static/js/3.cd8f85b6.chunk.js.map": "/gitlab-activity-viewer/static/js/3.cd8f85b6.chunk.js.map",
+    "index.html": "/gitlab-activity-viewer/index.html",
+    "static/css/main.5096a65e.chunk.css.map": "/gitlab-activity-viewer/static/css/main.5096a65e.chunk.css.map",
+    "static/js/2.299b20d9.chunk.js.LICENSE.txt": "/gitlab-activity-viewer/static/js/2.299b20d9.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e4ed7f12.js",
+    "static/js/2.299b20d9.chunk.js",
+    "static/css/main.5096a65e.chunk.css",
+    "static/js/main.49239fea.chunk.js"
+  ]
+}
