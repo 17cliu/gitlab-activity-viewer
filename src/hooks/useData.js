@@ -34,9 +34,9 @@ export default function useData({ host, username, accessToken }) {
         setStatus(FETCH_STATES.LOADING);
 
         fetchUserEvents({ host, userId: user.id, accessToken }).then(initialResponse => {
-            // TODO: reduce for testing
-            const totalPages = Math.min(initialResponse.totalPages, 10);
-            // const totalPages = initialResponse.totalPages;
+            // TODO: Reduce for testing
+            // const totalPages = Math.min(initialResponse.totalPages, 10);
+            const totalPages = initialResponse.totalPages;
 
             setEvents(initialResponse);
             setNumEventsLoaded(initialResponse.data.length);
