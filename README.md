@@ -23,16 +23,15 @@ _This project was bootstrapped with [Create React App](https://github.com/facebo
 
 ## Roadmap
 
-- Sanitize inputs
-- Handle user not found
-- Handle someone connecting to bad api -- don't break on bad data!
-- Responsive charts
-- Support loading _many_ pages of data
-    - Insert reasonable delays between calls in case of rate limiting
-    - Show progress bar (x of y pages)
-- Stats: Most active day of the week, most commits/merges/new issues on x
+- Provide error details instead of showing generic error message
+- Add tests for handling bad data (e.g. connecting to non-Gitlab api)
+- Responsive charts!
+- Better handling of dropped pages (right now, just shows what was successfully
+  fetched, without mentioning that some data couldn't be fetched)
+- Other stats: most commits/merges/new issues by project
 - Styling with Emotion/styled-components/etc
 - Cache data to local storage
     - Button to delete data in local storage
     - Button to add new data to local storage
     - Button to reload data completely
+- Load data from exported json file, instead of from api
