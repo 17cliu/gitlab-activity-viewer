@@ -1,11 +1,13 @@
-# GitLab Activity Viewer: How spicy is _your_ GitLab activity? :hot_pepper:
+# GitLab Activity Viewer
 
 ![build status](https://github.com/17cliu/gitlab-activity-viewer/workflows/build/badge.svg)
 
-
 See statistics about your contributions on GitLab.com or on a self-hosted instance of GitLab! [Try it out here](https://17cliu.github.io/gitlab-activity-viewer/)!
 
+![A preview of this site](/docs/preview.png)
+
 :warning: *This project is still under development and has not been fully tested yet! Use at your own risk!*
+
 
 ## Quick start
 
