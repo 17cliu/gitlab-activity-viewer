@@ -2,8 +2,10 @@
 
 ![build status](https://github.com/17cliu/gitlab-activity-viewer/workflows/build/badge.svg)
 
+:warning: **This project is still under development and has not been fully tested yet! Use at your own risk.**
 
 _This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app)._
+
 
 ## Quick start
 

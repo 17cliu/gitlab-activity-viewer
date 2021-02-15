@@ -1,21 +1,8 @@
 {
   "name": "gitlab-activity-viewer",
   "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.11.9",
-    "@testing-library/react": "^11.2.3",
-    "@testing-library/user-event": "^12.6.2",
-    "highcharts": "^8.2.2",
-    "highcharts-react-official": "^3.0.0",
-    "lodash.merge": "^4.6.2",
-    "node-sass": "^4.14.1",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-hook-form": "^6.14.2",
-    "react-scripts": "4.0.1",
-    "web-vitals": "^0.2.4"
-  },
+  "author": "Caroline Liu (https://superchlorine.com)",
+  "homepage": "https://17cliu.github.io/gitlab-activity-viewer",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
@@ -23,7 +10,9 @@
     "eject": "react-scripts eject",
     "lint:css": "stylelint src/scss/**/*.scss",
     "lint:js": "eslint ./ --ext .js",
-    "lint": "run-p lint:*"
+    "lint": "run-p lint:*",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -44,6 +33,20 @@
       "last 1 safari version"
     ]
   },
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.3",
+    "@testing-library/user-event": "^12.6.2",
+    "highcharts": "^8.2.2",
+    "highcharts-react-official": "^3.0.0",
+    "lodash.merge": "^4.6.2",
+    "node-sass": "^4.14.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-hook-form": "^6.14.2",
+    "react-scripts": "4.0.1",
+    "web-vitals": "^0.2.4"
+  },
   "devDependencies": {
     "@17cliu/eslint-config-personal": "^1.0.0",
     "babel-eslint": "^10.1.0",
@@ -53,6 +56,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^5.0.0",
+    "gh-pages": "^3.1.0",
     "npm-run-all": "^4.1.5",
     "stylelint": "^13.9.0",
     "stylelint-config-standard": "^20.0.0",
