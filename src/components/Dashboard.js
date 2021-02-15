@@ -62,11 +62,11 @@ function Dashboard({ host, username, accessToken }) {
             </p>
 
             <Tapestry cells={tapestryCells} startDate={oldestDate} />
+            <Statistics data={data} startDate={oldestDate} endDate={newestDate} />
 
-            <div className="charts">
-                <EventsByDayOfWeek data={data} />
+            <div className="row">
                 <EventsByTypeChart data={data} />
-                <Statistics data={data} startDate={oldestDate} endDate={newestDate} />
+                <EventsByDayOfWeek data={data} />
             </div>
 
             {/* <ol className="activity-list">

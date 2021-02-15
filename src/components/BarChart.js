@@ -73,7 +73,7 @@ function BarChart({ options }) {
     };
 
     return (
-        <div className="bar-chart">
+        <div className="chart-block">
             <HighchartsReact
                 highcharts={Highcharts}
                 options={merge(defaultOptions, options)}

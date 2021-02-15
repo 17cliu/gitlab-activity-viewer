@@ -41,12 +41,6 @@ pre, code {
     color: $color-text-code;
 }
 
-.debug {
-    border: 1px solid grey;
-    height: 400px;
-    overflow: scroll;
-}
-
 .activity-list {
     list-style-type: none;
 }
@@ -299,17 +293,36 @@ $tapestry-cell-size: 1.5rem;
     background: $color-xxxhot;
 }
 
-// Charts
+// Charts 'n' stats
 // ----------------------------------------------------------------------------
 
-.charts {
+// TODO: Move this to a generic "layout" part of this file
+.row {
     display: flex;
-    flex-direction: column;
-    margin: 1rem 0;
+    margin: 1rem -1rem;
 
     @media (max-width: 45em) {
         flex-direction: column;
     }
+}
+
+.stats-block {
+    flex: 1 0 0;
+    margin: 1rem;
+    padding: 1rem;
+    text-align: center;
+    border: 1px solid $color-border;
+
+    .highlight {
+        font-size: $font-size-x-large;
+        font-weight: 700;
+        display: block;
+    }
+}
+
+.chart-block {
+    flex: 1 0 0;
+    margin: 1rem;
 }
 
 // Footer
