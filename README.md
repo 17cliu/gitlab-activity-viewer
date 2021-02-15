@@ -1,13 +1,15 @@
-# GitLab Activity Viewer
+# GitLab Activity Viewer: How spicy is _your_ GitLab activity? :hot_pepper:
 
 ![build status](https://github.com/17cliu/gitlab-activity-viewer/workflows/build/badge.svg)
 
-:warning: **This project is still under development and has not been fully tested yet! Use at your own risk.**
 
-_This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app)._
+See statistics about your contributions on GitLab.com or on a self-hosted instance of GitLab! [Try it out here](https://17cliu.github.io/gitlab-activity-viewer/)!
 
+:warning: *This project is still under development and has not been fully tested yet! Use at your own risk!*
 
 ## Quick start
+
+_This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app)._
 
 - Create a `.env` file in root folder with your GitLab.com api token:
     ```
@@ -16,7 +18,7 @@ _This project was bootstrapped with [Create React App](https://github.com/facebo
 - `npm start` to run app in development mode. Site served at http://localhost:3000.
 - `npm test` to run tests in watch mode.
 - `npm run build` to build app for production.
-
+- `npm run deploy` to deploy app to GitHub Pages.
 
 ## Resources
 
@@ -37,3 +39,4 @@ _This project was bootstrapped with [Create React App](https://github.com/facebo
     - Button to add new data to local storage
     - Button to reload data completely
 - Load data from exported json file, instead of from api
+- Figure out how to deploy with GitHub Actions
